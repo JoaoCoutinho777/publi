@@ -11,8 +11,8 @@ export default NextAuth({
         CredentialsProvider({
             name: 'credentials',
             credentials: {
-                email: { label: 'email', type: 'text'},
-                password: { label: 'password', type: 'password'},
+                email: { label: 'email', type: 'text' },
+                password: { label: 'password', type: 'password' },
             },
         async authorize(credentials) {
             if(!credentials?.email || !credentials?.password){
@@ -23,7 +23,7 @@ export default NextAuth({
                 where: { email: credentials.email}
             });
 
-            if(!user || !user?.hashedPassword){
+            if (!user || !user?.hashedPassword) {
                 throw new Error('Invalid credentials')
             }
 
@@ -32,7 +32,7 @@ export default NextAuth({
                 user.hashedPassword
             );
 
-            if(!isCorrectPassword) {
+            if (!isCorrectPassword) {
                 throw new Error('Invalid credentials');
             }
 
@@ -40,7 +40,7 @@ export default NextAuth({
         }
         })
     ],
-    debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV == 'development',
     session: {
         strategy: 'jwt'
     },
