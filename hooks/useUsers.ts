@@ -3,7 +3,7 @@ import fetcher from '@/libs/fetcher';
 
 //will return the fields extracted from useSWR  library
 const useUsers = () => {
-    //SWR will fetch api/currente and store it in its global store
+    //SWR will fetch api/users and store it in its global store
     const { data, error, isLoading, mutate } = useSWR('/api/users', fetcher);
 
     return {
