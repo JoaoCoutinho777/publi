@@ -4,18 +4,20 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { useRouter } from "next/router";
 import { useCallback, useMemo } from "react";
 import Avatar from "../Avatar";
-import { AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineMessage, AiFillHeart } from "react-icons/ai";
+import useLike from "@/hooks/useLike";
 
 interface PostItemProps {
     data: Record<string, any>;
     userId?: string;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
+const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     const router = useRouter();
     const loginModal = useLoginModal();
 
     const { data: currentUser } = useCurrentUser();
+    const { hasLiked, toggleLike } = useLike({ postId: data.id, userId });
 
     //will be used for some inner child elements, and when i click on those inner child elements i want to stop event propagation
     //goToUser will overrride the global onClick of the parent
@@ -32,8 +34,14 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     const onLike = useCallback((event: any) => {
         event.stopPropagation();
 
-        loginModal.onOpen();
-    }, [loginModal]);
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        toggleLike();
+        
+    }, [currentUser, loginModal, toggleLike]);
+    
 
     const createdAt = useMemo(() => {
         if (!data ?.createdAt) {
@@ -43,6 +51,8 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
         return formatDistanceToNowStrict(new Date(data.createdAt));
     }, [data?.createdAt]);
 
+    const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
+    
     return (
         <div
         onClick={goToPost}
@@ -98,7 +108,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                     items-center
                     mt-3
                     gap-10">
-                        <div onClick={onLike}
+                        <div
                         className="
                         flex 
                         flex-row
@@ -113,7 +123,8 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                                 {data.comments?.length || 0}
                             </p>
                         </div>
-                        <div className="
+                        <div onClick={onLike}
+                        className="
                         flex 
                         flex-row
                         items-center
@@ -122,9 +133,9 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                         cursor-pointer
                         transition
                         hover:text-red-500">
-                            <AiOutlineHeart size={20}/>
+                            <LikeIcon size={20} color={hasLiked ? 'red' : ''}/>
                             <p>
-                                {data.comments?.length || 0}
+                                {data.likedIds?.length || 0}
                             </p>
                         </div>
                     </div>
