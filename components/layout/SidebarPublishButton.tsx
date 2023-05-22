@@ -2,8 +2,9 @@ import useLoginModal from "@/hooks/useLoginModal";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { FaFeather } from "react-icons/fa";
+import { GiPublicSpeaker } from "react-icons/gi";
 
-const SidebarTweetButton = () => {
+const SidebarPublishButton = () => {
     const router = useRouter();
     const loginModal = useLoginModal();
 
@@ -24,11 +25,11 @@ const SidebarTweetButton = () => {
                 flex
                 items-center
                 justify-center
-                bg-sky-500
+                bg-red-500
                 hover:bg-opacity-80
                 transition
                 cursor-pointer">
-                    <FaFeather size={24} color="white"/>
+                    <GiPublicSpeaker size={24} color="white"/>
             </div>
             {/* desktop version */}
             <div className="
@@ -38,7 +39,7 @@ const SidebarTweetButton = () => {
                 px-4
                 py-2
                 rounded-full
-                bg-sky-500
+                bg-red-500
                 hover:bg-opacity-90
                 cursor-pointer
                 transition">
@@ -49,11 +50,11 @@ const SidebarTweetButton = () => {
                         font-semibold
                         text-white
                         text-[20px]">
-                        Tweet
+                        Publi
                     </p>
             </div>
         </div>
     );
 }
 
-export default SidebarTweetButton;
+export default SidebarPublishButton;

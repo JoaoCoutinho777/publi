@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import { BsTwitter } from "react-icons/bs";
+import { GiBookmark } from "react-icons/gi";
+import { ImBooks } from "react-icons/im";
 
 const SidebarLogo = () => {
     const router = useRouter();
@@ -8,8 +10,8 @@ const SidebarLogo = () => {
         onClick={() => router.push('/')}
         className="
         rounded-full 
-        h-14 
-        w-14 
+        h-16 
+        w-16 
         p-4 
         flex 
         items-center 
@@ -18,7 +20,7 @@ const SidebarLogo = () => {
         hover:bg-opacity-10 
         cursor-pointer 
         transition">
-            <BsTwitter size={28} color="white"/>
+            <ImBooks size={40} color="white"/>
 
         </div>
     );

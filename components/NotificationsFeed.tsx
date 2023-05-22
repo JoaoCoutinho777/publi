@@ -2,6 +2,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useNotifications from "@/hooks/useNotifications";
 import { useEffect } from "react";
 import { BsTwitter } from "react-icons/bs";
+import { ImBooks } from "react-icons/im";
 
 const NotificationsFeed = () => {
 
@@ -37,7 +38,7 @@ const NotificationsFeed = () => {
                 gap-4
                 border-b-[1px]
                 border-neutral-800">
-                    <BsTwitter color="white" size={32}/>
+                    <ImBooks color="white" size={32}/>
                     <p className="text-white">
                         {notification.body}
                     </p>

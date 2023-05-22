@@ -38,7 +38,7 @@ const Form: React.FC<FormProps> = ({
 
             await axios.post(url, { body });
 
-            toast.success('Tweet Created!');
+            toast.success('Publi Created!');
 
             setBody('');
             mutatePosts();
@@ -86,7 +86,7 @@ const Form: React.FC<FormProps> = ({
                         <div className="mt-4 flex flex-row justify-end">
                             <Button disabled={isLoading || !body}
                             onClick={onSubmit}
-                            label="Tweet"/>
+                            label="Publi"/>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ const Form: React.FC<FormProps> = ({
                 items-center 
                 justify-center 
                 gap-4"
-                >Welcome to Twitter</h1>
+                >Welcome to Publi</h1>
                 <div className="flex flex-row items-center justify-center gap-4">
                     <Button label="Login" onClick={loginModal.onOpen}/>
                     <Button label="Register" onClick={registerModal.onOpen} secondary/>
